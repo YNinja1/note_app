@@ -8,34 +8,75 @@ class AddNoteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      child:  Padding(
+      child: Padding(
         padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            CustomTextField(
-              hint: 'Title',
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            CustomTextField(
-              hint: 'Content',
-              maxLines: 5,
-            ),
-            SizedBox(
-              height: 120,
-            ),
-            CustomButton(),
-            SizedBox(
-              height: 16,
-            ),
-          ],
-        ),
+        child: AddNoteForm(),
       ),
     );
   }
 }
 
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
+    super.key,
+  });
+
+  @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+class _AddNoteFormState extends State<AddNoteForm> {
+
+ final GlobalKey<FormState> formKey = GlobalKey();
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+
+  String? title,subTitle;
+  @override
+  Widget build(BuildContext context) {
+    return  Form(
+      key: formKey,
+      autovalidateMode: autoValidateMode,
+      child:  Column(
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          CustomTextFormField(
+            onSaved: (value){
+              title = value;
+            },
+            hint: 'Title',
+          ),
+          const  SizedBox(
+            height: 16,
+          ),
+          CustomTextFormField(
+            onSaved: (value){
+              subTitle = value;
+            },
+            hint: 'Content',
+            maxLines: 5,
+          ),
+          const SizedBox(
+            height: 120,
+          ),
+           CustomButton(
+             onTap: (){
+               if(formKey.currentState!.validate())
+               {
+                 formKey.currentState!.save();
+               }else{
+                 autoValidateMode = AutovalidateMode.always;
+                 setState(() {});
+
+               }
+             },
+           ),
+          const  SizedBox(
+            height: 16,
+          ),
+        ],
+      ),
+    );
+  }
+}
