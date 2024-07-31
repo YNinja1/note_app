@@ -14,17 +14,17 @@ class AddNoteBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: BlocConsumer<AddNoteCubit, AddNoteState>(
           listener: (context, state) {
-            if(state is AddNoteFailure){
-              print('failed ${state.errMessage}');
+            if (state is AddNoteFailure) {
+              print(' failed ${state.errMessage}');
             }
-
-            if(state is AddNoteSuccess){
+            if (state is AddNoteSuccess) {
               Navigator.pop(context);
             }
           },
           builder: (context, state) {
-            return  ModalProgressHUD(inAsyncCall: state is AddNoteLoading ? true : false ,
-            child: const AddNoteForm());
+            return ModalProgressHUD(
+                inAsyncCall: state is AddNoteLoading ? true : false,
+                child: const AddNoteForm());
           },
         ),
       ),
