@@ -68,7 +68,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
                }else{
                  autoValidateMode = AutovalidateMode.always;
                  setState(() {});
-
                }
              },
            ),
