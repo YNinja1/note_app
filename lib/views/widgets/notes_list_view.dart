@@ -23,7 +23,7 @@ class NotesListView extends StatelessWidget {
       builder: (context, state) {
         List<NoteModel> notes =
             BlocProvider.of<DisplayNoteCubit>(context).notes ?? [];
-        return state is DisplayNoteNoNotes
+        return state is DisplayNoteInitial
             ? Scaffold(
                 body: Center(child: noNotesText()),
               )

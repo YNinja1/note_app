@@ -5,7 +5,8 @@ sealed class DisplayNoteState {}
 
 final class DisplayNoteInitial extends DisplayNoteState {}
 
-final class DisplayNoteNoNotes extends DisplayNoteState {}
+final class DisplayNoteSuccess extends DisplayNoteState {}
+
 
 
 

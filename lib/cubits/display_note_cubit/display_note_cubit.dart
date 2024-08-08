@@ -12,14 +12,15 @@ class DisplayNoteCubit extends Cubit<DisplayNoteState> {
   List<NoteModel>? notes;
 
   fetchAllNotes() {
-    if (notes != null) {
-      var notesBox = Hive.box<NoteModel>(kNotesBox);
+    var notesBox = Hive.box<NoteModel>(kNotesBox);
 
-         notes = notesBox.values.toList();
-         print('zzzzzzzzzzzzzzzz notes = $notes');
-    }else if(notes == null)
-    {
-      emit(DisplayNoteNoNotes());
+    notes = notesBox.values.toList();
+    if (notes != null) {
+      emit(DisplayNoteSuccess());
+      print('zzzzzzzzzzzzzzzz notes = $notes');
+    } else if (notes == null) {
+      print('zzzzzzzzzzzzzzzz notes = $notes');
+      emit(DisplayNoteInitial());
     }
   }
 }
