@@ -21,21 +21,31 @@ class NotesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DisplayNoteCubit, DisplayNoteState>(
       builder: (context, state) {
-        List<NoteModel> notes = BlocProvider.of<DisplayNoteCubit>(context).notes!;
-        return ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.zero,
-            itemCount: notes.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: NoteItem(
-                  note: notes[index],
-                  color: colorsData[index = index % 6],
-                ),
-              );
-            });
+        List<NoteModel> notes =
+            BlocProvider.of<DisplayNoteCubit>(context).notes ?? [];
+        return state is DisplayNoteNoNotes
+            ? Scaffold(
+                body: Center(child: noNotesText()),
+              )
+            : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: notes.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: NoteItem(
+                      note: notes[index],
+                      color: colorsData[index = index % 6],
+                    ),
+                  );
+                });
       },
     );
   }
+
+  Text noNotesText() => const Text(
+        'Add ur first Note 😊',
+        style: TextStyle(fontSize: 32, color: kPrimaryColor),
+      );
 }

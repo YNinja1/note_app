@@ -85,8 +85,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
 }
  String customDateTime(){
 
-   DateTime now = DateTime.now();
-   String formattedDate = DateFormat('yMd').format(now);
+   DateTime currentDate = DateTime.now();
+   String formattedDate = DateFormat.yMMMMd('en_US').format(currentDate);
 
-   return formattedDate.toString();
+   return formattedDate;
  }
