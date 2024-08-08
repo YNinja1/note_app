@@ -24,9 +24,7 @@ class NotesListView extends StatelessWidget {
         List<NoteModel> notes =
             BlocProvider.of<DisplayNoteCubit>(context).notes ?? [];
         return state is DisplayNoteInitial
-            ? Scaffold(
-                body: Center(child: noNotesText()),
-              )
+            ? Center(child: noNotesText())
             : ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.zero,
