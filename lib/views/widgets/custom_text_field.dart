@@ -4,7 +4,6 @@ import 'package:note_app/constants.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
-
     required this.hint,
     this.maxLines = 1,
     this.onSaved,

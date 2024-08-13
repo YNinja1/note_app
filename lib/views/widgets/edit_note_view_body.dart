@@ -36,9 +36,8 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 widget.note.subTitle = content ?? widget.note.subTitle;
                 widget.note.save();
                 BlocProvider.of<DisplayNoteCubit>(context).fetchAllNotes();
-                if (title != null || content != null) {
-                  Navigator.pop(context);
-                }
+
+                Navigator.pop(context);
               },
             ),
             const SizedBox(
