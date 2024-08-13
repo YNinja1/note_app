@@ -6,10 +6,9 @@ import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/widgets/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key, required this.color, required this.note});
+  const NoteItem({super.key,  required this.note});
 
   final NoteModel note;
-  final Color color;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,7 +21,7 @@ class NoteItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(bottom: 24, top: 24, left: 16),
         decoration: BoxDecoration(
-          color: color,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(

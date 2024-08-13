@@ -8,14 +8,7 @@ import 'package:note_app/views/widgets/note_item.dart';
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
 
-  final List<Color> colorsData = const [
-    Color(0xffFFCD79),
-    Color(0xffE7E895),
-    kPrimaryColor,
-    Color(0xffD59DDC),
-    Color(0xffE78FB1),
-    Color(0xa6e64845),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +27,7 @@ class NotesListView extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: NoteItem(
                       note: notes[index],
-                      color: colorsData[index = index % 6],
+
                     ),
                   );
                 });
