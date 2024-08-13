@@ -1,31 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubits/display_note_cubit/display_note_cubit.dart';
+import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/widgets/custom_app_bar.dart';
 import 'package:note_app/views/widgets/custom_text_field.dart';
 
-class EditNoteViewBody extends StatelessWidget {
-  const EditNoteViewBody({super.key});
+class EditNoteViewBody extends StatefulWidget {
+  const EditNoteViewBody({super.key, required this.note});
+
+  final NoteModel note;
+
+  @override
+  State<EditNoteViewBody> createState() => _EditNoteViewBodyState();
+}
+
+class _EditNoteViewBodyState extends State<EditNoteViewBody> {
+  String? title, content;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child:  Padding(
-        padding:  EdgeInsets.only(top: 24,left: 24,right: 24,bottom: 16),
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 24, left: 24, right: 24, bottom: 16),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            CustomAppBar(title: 'Edit Note',
-            icon: Icons.done,
+            CustomAppBar(
+              title: 'Edit Note',
+              icon: Icons.done,
+              onPressed: () {
+                widget.note.title = title ?? widget.note.title;
+                widget.note.subTitle = content ?? widget.note.subTitle;
+                widget.note.save();
+                BlocProvider.of<DisplayNoteCubit>(context).fetchAllNotes();
+                if (title != null || content != null) {
+                  Navigator.pop(context);
+                }
+              },
             ),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
-            CustomTextFormField(hint: 'Title'),
-            SizedBox(
+            CustomTextFormField(
+                onChanged: (value) {
+                  title = value;
+                },
+                hint: widget.note.title),
+            const SizedBox(
               height: 16,
             ),
-            CustomTextFormField(hint: 'Content',maxLines: 5,
+            CustomTextFormField(
+              onChanged: (value) {
+                content = value;
+              },
+              hint: widget.note.subTitle,
+              maxLines: 5,
             ),
           ],
         ),
