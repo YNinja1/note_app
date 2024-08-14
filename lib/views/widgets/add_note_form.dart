@@ -12,6 +12,7 @@ class AddNoteForm extends StatefulWidget {
     super.key,
   });
 
+
   @override
   State<AddNoteForm> createState() => _AddNoteFormState();
 }
@@ -21,7 +22,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   String? title, subTitle;
-
+   NoteModel? noteModel;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,7 +54,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           ),
           const ColorsListView(),
           const SizedBox(
-            height: 80,
+            height: 40,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
@@ -81,7 +82,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 title: title!,
                 subTitle: subTitle!,
                 date: customDateTime(),
-                color: Colors.white.value);
+                color: BlocProvider.of<AddNoteCubit>(context).color.value
+            );
             BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
           } else {
             autoValidateMode = AutovalidateMode.always;
