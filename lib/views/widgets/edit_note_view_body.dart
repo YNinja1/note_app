@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/cubits/display_note_cubit/display_note_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/widgets/custom_app_bar.dart';
+import 'package:note_app/views/widgets/custom_snack_bar.dart';
 import 'package:note_app/views/widgets/custom_text_field.dart';
 import 'package:note_app/views/widgets/edit_note_colors_list.dart';
 
@@ -39,6 +40,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 BlocProvider.of<DisplayNoteCubit>(context).fetchAllNotes();
 
                 Navigator.pop(context);
+                customShowSnackBar(context, message: 'Edit Note Success!');
               },
             ),
             const SizedBox(
